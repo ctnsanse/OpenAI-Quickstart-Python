@@ -64,3 +64,6 @@ input[type="submit"] {
   font-weight: bold;
   margin-top: 40px;
 }
+ul {
+  list-style-type: none;
+}  

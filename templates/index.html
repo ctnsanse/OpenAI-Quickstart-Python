@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>OpenAI Quickstart</title>
+  <title>Chat GPT</title>
   <link
     rel="shortcut icon"
     href="{{ url_for('static', filename='dog.png') }}"
@@ -9,13 +9,19 @@
 </head>
 
 <body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
+  <!-- <img src="{{ url_for('static', filename='dog.png') }}" class="icon" /> -->
+  <h3>Générateur d'idées</h3>
   <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
+    <input type="text" name="marque" placeholder="Saisir une demande" required />
+    <input type="submit" value="Générer des idées" />
   </form>
   {% if result %}
-  <div class="result">{{ result }}</div>
+  <!-- <div class="result">{{ result }}</div> -->
+  {% set results = result.split('\n') %}
+  <ul>
+    {% for item in results %}
+    <li>{{ item }}</li>
+    {% endfor %} 
+  </ul>
   {% endif %}
 </body>

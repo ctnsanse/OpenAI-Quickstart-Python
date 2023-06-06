@@ -1,0 +1,36 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+autopep8 = "*"
+certifi = "*"
+charset-normalizer = "*"
+click = "*"
+et-xmlfile = "*"
+flask = "*"
+idna = "*"
+itsdangerous = "*"
+jinja2 = "*"
+markupsafe = "*"
+numpy = "*"
+openai = "*"
+openpyxl = "*"
+pandas = "*"
+pandas-stubs = "*"
+pycodestyle = "*"
+python-dateutil = "*"
+python-dotenv = "*"
+pytz = "*"
+requests = "*"
+six = "*"
+toml = "*"
+tqdm = "*"
+urllib3 = "*"
+werkzeug = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"

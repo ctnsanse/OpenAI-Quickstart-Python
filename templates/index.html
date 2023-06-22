@@ -19,8 +19,8 @@
   <!-- <div class="result">{{ result }}</div> -->
   {% set results = result.split('\n') %}
   <ul>
-    {% for item in results %}
-    <li>{{ item }}</li>
+    {% for result in results %}
+    <li>{{ result }}</li>
     {% endfor %} 
   </ul>
   {% endif %}

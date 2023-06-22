@@ -29,7 +29,7 @@ def index(request: Request):
 
 @app.get("/")
 async def read_result(request : Request):
-    return templates.TemplateResponse("result.html", {"request" : request, "result" : read_result})
+    return templates.TemplateResponse("index.html", {"request" : request, "result" : read_result})
 
 def generate_prompt(animal):
     return """Suggest three names for an animal that is a superhero.

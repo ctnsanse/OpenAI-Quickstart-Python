@@ -2,11 +2,13 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.responses  import RedirectResponse
 import openai
+from fastapi.templating import Jinja2Templates
 
 
 app = FastAPI()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+templates = Jinja2Templates(directory="templates")
 
 @app.post("/")
 def index(request: Request):
@@ -25,6 +27,9 @@ def index(request: Request):
     # result = request.args.get("result")
     # return render_template("index.html", result=result)
 
+@app.get("/")
+async def read_result(request : Request):
+    return templates.TemplateResponse("result.html", {"request" : request, "result" : read_result})
 
 def generate_prompt(animal):
     return """Suggest three names for an animal that is a superhero.

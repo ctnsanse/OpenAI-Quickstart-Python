@@ -1,35 +1,30 @@
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
 from fastapi.responses  import RedirectResponse
 import openai
 from fastapi.templating import Jinja2Templates
-
+from fastapi.staticfiles import StaticFiles
+from typing import Annotated
 
 app = FastAPI()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 @app.post("/")
-def index(request: Request):
-    messages = request.form["marque"]
-    print(messages)
+async def index(request: Request, marque: Annotated[str, Form()]):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=generate_idée(messages),
+        messages=generate_messages(marque),
         temperature=0.6,
-    )
-    redirect_url = request.url_for('index', **{ "result": response.choices[0].message.contentk})
-    return RedirectResponse(redirect_url) 
-    # print(response)
-    # return redirect(url_for("index", result=response.choices[0].message.content))
-
-    # result = request.args.get("result")
-    # return render_template("index.html", result=result)
+    )   
+    return templates.TemplateResponse("index.html", {"request" : request, "result" : response.choices[0].message.content})
 
 @app.get("/")
-async def read_result(request : Request):
-    return templates.TemplateResponse("index.html", {"request" : request, "result" : read_result})
+async def read_result(request : Request, result: str = ""):
+    return templates.TemplateResponse("index.html", {"request" : request, "result" : ""})
 
 def generate_prompt(animal):
     return """Suggest three names for an animal that is a superhero.
